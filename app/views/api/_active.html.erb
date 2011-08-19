@@ -1,0 +1,10 @@
+<div id="result-active">
+  <% unless active_sessions.blank? %>
+    <% active_sessions.each do |x| %>
+      Room id : <%= x[:id] %><br />
+      Desc : <%= x[:description] %><br /><br />
+    <% end %>
+  <% else %>
+    There are no active sessions
+  <% end %>
+</div>

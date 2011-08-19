@@ -1,0 +1,34 @@
+<h1> Creating Room</h1>
+<% form_remote_tag :url => {:controller => :api, :action => "create_room"} do %>
+    <%= text_field_tag "user",nil %>
+  <%= submit_tag "submit" %>
+<% end %>
+
+<div id="result"></div>
+<br /><br /><br /><br /><br />
+
+<h2>Join room</h2>
+<% form_remote_tag :url => {:controller => :api, :action => "join_room"} do %>
+    User    :<%= text_field_tag "user",nil %>    Room id :<%= text_field_tag "room_id",nil %>
+  <%= submit_tag "submit" %>
+<% end %>
+
+<div id="result-room"></div>
+<br /><br /><br /><br /><br />
+
+<h1>Active Sessions</h1>
+<%= link_to_remote  "Retrieve data",:url => {:controller => :api, :action => "get_active_session", :status => "active"}, :method => :get  %>
+results :<br />
+
+<div id="result-active"></div>
+<br /><br /><br /><br /><br />
+
+
+<h1>Expired Sessions</h1>
+<%= link_to_remote  "Retrieve data",:url => {:controller => :api, :action => "get_active_session", :status => "past"}, :method => :get  %>
+results <br />
+
+<div id="result-past"></div>
+<br /><br /><br /><br /><br />
+
+
