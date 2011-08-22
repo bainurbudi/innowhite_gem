@@ -40,10 +40,25 @@ class ApiController < ApplicationController
     innowhite = Innowhite.new(params[:user],"abc")
     res = innowhite.join_meeting(params[:room_id], params[:user])
     require 'pp'
-
-    pp res
+    
     render :update do |page|
       page.replace "result-room", "<div id='result-room'>#{res}</div>"
+    end
+  end
+
+  def create_room_info
+    @user = User.find(params[:user])
+    @meeting = WebSession.find_by_session_id(params[:roomId])
+    @tags = params[:tags].split(',')
+    @desc = params[:desc]
+
+    @meeting.update_attribute(:session_desc, @desc)
+    @meeting.tag_list = @tags
+    @meeting.save!
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @meeting }
     end
   end
 
